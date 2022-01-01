@@ -1,0 +1,27 @@
+
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    <title>Add Student</title>
+{% endblock %}
+
+
+{% block content %}
+
+<p class="h3" align="center">Student Form</p>
+
+<div class="container">
+
+    <form method="post" enctype="multipart/form-data" class="jumbotron", style="50%">
+    {% csrf_token %}
+    {{form | crispy}}
+    <input type="submit" value="Add " class="btn btn-success">
+    </form>
+
+</div>
+
+<a class="btn btn-secondary btn-lg" href="{% url 'show_stud' %}">Show  Data</a>
+
+{% endblock %}

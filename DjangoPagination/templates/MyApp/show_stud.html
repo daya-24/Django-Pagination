@@ -1,0 +1,71 @@
+
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Student Data</title>
+{% endblock %}
+
+
+
+
+{% block content %}
+<p class="h3" align="center">Student Data</p>
+<br><br>
+<table class="table table-striped">
+    <tr>
+        <th>Roll No.</th>
+        <th>Student Name</th>
+        <th>Standard</th>
+        <th>Stream</th>
+        <th>City</th>
+        <th>Action</th>
+        <th>Action</th>
+
+    </tr>
+
+     {% for p1 in page_obj %}
+    <tr>
+        <td>{{p1.rollno}}</td>
+        <td>{{p1.name}}</td>
+        <td>{{p1.standard}}</td>
+        <td>{{p1.stream}}</td>
+        <td>{{p1.city}}</td>
+
+
+        <td>
+            <a href="{% url 'delete' p1.id %}">
+                <button class="btn btn-danger">Delete</button>
+            </a>
+        </td>
+
+        <td>
+            <a href="{% url 'update' p1.id %}">
+                <button class="btn btn-warning">Update</button>
+            </a>
+        </td>
+
+
+    </tr>
+    {% endfor %}
+</table>
+<a class="btn btn-secondary btn-lg " href="{% url 'add_stud' %}">Add student </a>
+
+<br><br>
+<div class="pagination">
+    <span class="step-links" style="margin:auto">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+        {% endif %}
+            <span class="current">Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+        {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">Next</a>
+            <a href="?page={{page_obj.paginator.num_pages}}">last</a>
+        {% endif %}
+
+    </span>
+</div>
+<br><br>
+
+{% endblock %}
